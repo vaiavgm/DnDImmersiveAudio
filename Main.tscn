@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ck62rlnobsipv"]
 
-[ext_resource type="Script" path="res://DragDropFileReader.gd" id="1_y8onm"]
+[ext_resource type="Script" path="res://Scripts/DragDropFileReader.gd" id="1_y8onm"]
 
 [node name="ImmersiveAudioRoot" type="Control"]
 layout_mode = 3
@@ -63,5 +63,4 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Stop music"
 
-[connection signal="pressed" from="UIPanel/PlaylistToSaveTxt/SaveToJSONBtn" to="." method="_on_save_to_json_btn_pressed" binds= [""]]
 [connection signal="pressed" from="UIPanel/Button" to="." method="_on_stop_btn_pressed"]

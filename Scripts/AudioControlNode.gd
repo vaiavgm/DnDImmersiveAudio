@@ -2,7 +2,7 @@ extends Control
 
 class_name AudioControlNode
 
-const AUDIO_CONTROL_NODE = preload("res://AudioControlNode.tscn")
+const AUDIO_CONTROL_NODE = preload("res://Scenes/AudioControlNode.tscn")
 
 @onready var panel: Panel = $Panel
 

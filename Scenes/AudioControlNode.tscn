@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b2a820we1j7qp"]
 
-[ext_resource type="Script" path="res://AudioControlNode.gd" id="1_o146d"]
+[ext_resource type="Script" path="res://Scripts/AudioControlNode.gd" id="1_6uynu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a1gdd"]
 
@@ -10,7 +10,7 @@ anchor_right = 0.144
 anchor_bottom = 0.182
 offset_right = -165.888
 offset_bottom = -117.936
-script = ExtResource("1_o146d")
+script = ExtResource("1_6uynu")
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(100, 100)
