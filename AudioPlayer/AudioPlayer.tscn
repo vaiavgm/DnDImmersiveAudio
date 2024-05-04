@@ -6,28 +6,19 @@
 script = ExtResource("1_v2u2x")
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
-bus = &"BGM"
 
 [node name="SFX0" type="AudioStreamPlayer" parent="."]
-bus = &"SFX"
 
 [node name="SFX1" type="AudioStreamPlayer" parent="."]
-bus = &"SFX"
 
 [node name="SFX2" type="AudioStreamPlayer" parent="."]
-bus = &"SFX"
 
 [node name="SFX3" type="AudioStreamPlayer" parent="."]
-bus = &"SFX"
 
 [node name="SFX4" type="AudioStreamPlayer" parent="."]
-bus = &"SFX"
 
 [node name="SFX5" type="AudioStreamPlayer" parent="."]
-bus = &"SFX"
 
 [node name="SFX6" type="AudioStreamPlayer" parent="."]
-bus = &"SFX"
 
 [node name="SFX7" type="AudioStreamPlayer" parent="."]
-bus = &"SFX"

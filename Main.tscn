@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ck62rlnobsipv"]
+[gd_scene load_steps=3 format=3 uid="uid://ck62rlnobsipv"]
 
 [ext_resource type="PackedScene" uid="uid://b2a820we1j7qp" path="res://AudioControlNode.tscn" id="1_nfrna"]
+[ext_resource type="Script" path="res://DragDropFileReader.gd" id="1_y8onm"]
 
 [node name="ImmersiveAudioRoot" type="Control"]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_y8onm")
 
 [node name="UIPanel" type="Panel" parent="."]
 layout_mode = 1

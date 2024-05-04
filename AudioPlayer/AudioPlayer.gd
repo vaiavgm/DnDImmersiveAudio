@@ -107,9 +107,28 @@ func play_sfx_from_filename(filename: String) -> void:
 		printerr("Invalid audio stream (sfx) from file %s. No music will play." % (full_file_path))
 		return
 
-	var audio_stream: AudioStream = load(full_file_path) as AudioStream
+		####
+	var snd_file := FileAccess.open(full_file_path, FileAccess.READ)
+	
+	var split_file_name := full_file_path.split(".")
+	var file_ending := split_file_name[split_file_name.size() - 1]
+	
+	match file_ending:
+		"mp3": 
+			var audio_stream := AudioStreamMP3.new()
+			audio_stream.data = snd_file.get_buffer(snd_file.get_length())
+			
+			snd_file.close()
+			play_sfx(audio_stream)
+		"ogg":
+			var audio_stream := AudioStreamOggVorbis.load_from_file(full_file_path)
+			
+			snd_file.close()
+			play_sfx(audio_stream)
+		_: 
+			printerr(".%s not supported!" % file_ending)
 
-	play_sfx(audio_stream)
+	####
 
 
 func play_bgm_from_filename(filename: String, playback_mode: PlaybackMode) -> void:
@@ -133,14 +152,17 @@ func play_bgm_from_filename(filename: String, playback_mode: PlaybackMode) -> vo
 		"mp3": 
 			var audio_stream := AudioStreamMP3.new()
 			audio_stream.data = snd_file.get_buffer(snd_file.get_length())
-			set_bgm_loop(playback_mode == PlaybackMode.PLAY_LOOPED)
+			
+			if playback_mode != PlaybackMode.PLAY_GODOT_DEFAULT:
+				set_bgm_loop(playback_mode == PlaybackMode.PLAY_LOOPED)
 			
 			snd_file.close()
 			play_bgm(audio_stream)
 		"ogg":
-			#var audio_stream := AudioStreamOggVorbis.new()
 			var audio_stream := AudioStreamOggVorbis.load_from_file(full_file_path)
-			set_bgm_loop(playback_mode == PlaybackMode.PLAY_LOOPED)
+			
+			if playback_mode != PlaybackMode.PLAY_GODOT_DEFAULT:
+				set_bgm_loop(playback_mode == PlaybackMode.PLAY_LOOPED)
 			
 			snd_file.close()
 			play_bgm(audio_stream)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b2a820we1j7qp"]
 
-[ext_resource type="Script" path="res://DragDropFileReader.gd" id="1_7lr2x"]
+[ext_resource type="Script" path="res://AudioControlNode.gd" id="1_o146d"]
 
 [node name="AudioControlNode" type="Control"]
 layout_mode = 3
@@ -14,7 +14,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 offset_right = 381.0
 offset_bottom = 100.0
-script = ExtResource("1_7lr2x")
+script = ExtResource("1_o146d")
 
 [node name="PlayButton" type="Button" parent="Panel"]
 layout_mode = 1
@@ -55,7 +55,7 @@ layout_mode = 0
 offset_right = 254.0
 offset_bottom = 33.0
 
-[node name="CheckButton" type="CheckButton" parent="Panel"]
+[node name="IsSFXButton" type="CheckButton" parent="Panel"]
 layout_mode = 0
 offset_left = 266.0
 offset_top = 34.0
@@ -64,3 +64,4 @@ offset_bottom = 65.0
 text = "SFX:"
 
 [connection signal="mouse_entered" from="Panel" to="Panel" method="_on_mouse_entered"]
+[connection signal="pressed" from="Panel/PlayButton" to="Panel" method="_on_play_button_pressed"]
