@@ -51,6 +51,7 @@ static func deserialize_array(data: Variant) -> Array[AudioControlNode]:
 
 static func deserialize(data: Dictionary) -> AudioControlNode:
 	var result: AudioControlNode = AUDIO_CONTROL_NODE.instantiate()
+	#var result := AudioControlNode.new()
 	if data.is_empty():
 		printerr("Could not deserialize DialogueEditorNode!")
 		return result
