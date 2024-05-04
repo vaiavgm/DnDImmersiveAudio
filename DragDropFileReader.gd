@@ -4,7 +4,6 @@ class_name DragDropFileReader
 
 @onready var playlist_to_save_txt: LineEdit = $UIPanel/PlaylistToSaveTxt
 @onready var control_nodes: Control = $UIPanel/ControlNodes
-const AUDIO_CONTROL_NODE = preload("res://AudioControlNodeUI.tscn")
 
 static var last_file_path: String
 static var playlist: Dictionary ## contains PlaylistEntry objects
@@ -17,7 +16,7 @@ func _ready() -> void:
 	Signals.TRACK_COMPLETED_SIGNAL.connect(_play_next_track)
 	
 	for i: int in 15:
-		var new_control_node: AudioControlNode = AUDIO_CONTROL_NODE.instantiate()
+		var new_control_node: AudioControlNode = AudioControlNode.AUDIO_CONTROL_NODE.instantiate()
 		control_nodes.add_child(new_control_node)
 		@warning_ignore("integer_division")
 		new_control_node.position.x = new_control_node.id / 5 * 300
