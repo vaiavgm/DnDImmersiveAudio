@@ -4,7 +4,7 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a1gdd"]
 
-[node name="AudioControlNode" type="Control"]
+[node name="ControlNode" type="Control"]
 layout_mode = 3
 anchor_right = 0.144
 anchor_bottom = 0.182
