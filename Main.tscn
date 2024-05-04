@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://ck62rlnobsipv"]
+[gd_scene load_steps=2 format=3 uid="uid://ck62rlnobsipv"]
+
+[ext_resource type="PackedScene" uid="uid://b2a820we1j7qp" path="res://AudioControlNode.tscn" id="1_nfrna"]
 
 [node name="ImmersiveAudioRoot" type="Control"]
 layout_mode = 3
@@ -15,3 +17,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AudioControlNode" parent="." instance=ExtResource("1_nfrna")]
+layout_mode = 1
+offset_left = 66.0
+offset_top = 44.0
+offset_right = -99.888
+offset_bottom = -73.936
+
+[node name="AudioControlNode2" parent="." instance=ExtResource("1_nfrna")]
+layout_mode = 1
+offset_left = 640.0
+offset_top = 307.0
+offset_right = 474.112
+offset_bottom = 189.064

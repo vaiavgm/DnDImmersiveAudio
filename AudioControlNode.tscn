@@ -62,3 +62,5 @@ offset_top = 34.0
 offset_right = 346.0
 offset_bottom = 65.0
 text = "SFX:"
+
+[connection signal="mouse_entered" from="Panel" to="Panel" method="_on_mouse_entered"]
