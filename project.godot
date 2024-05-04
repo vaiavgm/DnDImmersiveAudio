@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.2", "GL Compatibility")
 [autoload]
 
 AudioPlayer="*res://AudioPlayer/AudioPlayer.tscn"
+Signals="*res://Signals.gd"
 
 [debug]
 

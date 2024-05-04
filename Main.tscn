@@ -20,16 +20,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AudioControlNode" parent="." instance=ExtResource("1_nfrna")]
+[node name="ControlNodes" type="Control" parent="UIPanel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AudioControlNode" parent="UIPanel/ControlNodes" instance=ExtResource("1_nfrna")]
 layout_mode = 1
 offset_left = 66.0
 offset_top = 44.0
-offset_right = -99.888
-offset_bottom = -73.936
+offset_right = 60.24
+offset_bottom = 36.72
 
-[node name="AudioControlNode2" parent="." instance=ExtResource("1_nfrna")]
+[node name="AudioControlNode3" parent="UIPanel/ControlNodes" instance=ExtResource("1_nfrna")]
+layout_mode = 1
+offset_left = 67.0
+offset_top = 166.0
+offset_right = 61.24
+offset_bottom = 158.72
+
+[node name="AudioControlNode2" parent="UIPanel/ControlNodes" instance=ExtResource("1_nfrna")]
 layout_mode = 1
 offset_left = 640.0
 offset_top = 307.0
-offset_right = 474.112
-offset_bottom = 189.064
+offset_right = 634.24
+offset_bottom = 299.72

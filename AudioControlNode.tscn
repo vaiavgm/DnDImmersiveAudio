@@ -8,24 +8,21 @@ anchor_right = 0.144
 anchor_bottom = 0.182
 offset_right = -165.888
 offset_bottom = -117.936
+script = ExtResource("1_o146d")
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 offset_right = 381.0
 offset_bottom = 100.0
-script = ExtResource("1_o146d")
 
 [node name="PlayButton" type="Button" parent="Panel"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -41.0
 offset_top = -31.0
-grow_horizontal = 0
+offset_right = 41.0
 grow_vertical = 0
 text = "Play"
 
@@ -37,6 +34,7 @@ anchor_right = 1.0
 offset_left = -67.0625
 offset_bottom = 31.0
 grow_horizontal = 0
+placeholder_text = "0"
 
 [node name="LoopLbl" type="Label" parent="Panel/LoopTxt"]
 layout_mode = 1
@@ -48,12 +46,49 @@ offset_top = -11.5
 offset_right = -5.9375
 offset_bottom = 11.5
 grow_vertical = 2
-text = "Loop: "
+text = "Count:"
+
+[node name="LinkTxt" type="LineEdit" parent="Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -67.0625
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+placeholder_text = "-1"
+
+[node name="LinkLbl" type="Label" parent="Panel/LinkTxt"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -52.9375
+offset_top = -11.5
+offset_right = -5.9375
+offset_bottom = 11.5
+grow_vertical = 2
+text = "Link:"
 
 [node name="TracknameLbl" type="Label" parent="Panel"]
 layout_mode = 0
 offset_right = 254.0
 offset_bottom = 33.0
+text = "<TRACKNAME>"
+
+[node name="TrackIDLbl" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -33.0
+offset_right = 100.0
+grow_vertical = 0
+text = "<ID>"
 
 [node name="IsSFXButton" type="CheckButton" parent="Panel"]
 layout_mode = 0
@@ -63,5 +98,5 @@ offset_right = 346.0
 offset_bottom = 65.0
 text = "SFX:"
 
-[connection signal="mouse_entered" from="Panel" to="Panel" method="_on_mouse_entered"]
-[connection signal="pressed" from="Panel/PlayButton" to="Panel" method="_on_play_button_pressed"]
+[connection signal="mouse_entered" from="Panel" to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="Panel/PlayButton" to="." method="_on_play_button_pressed"]

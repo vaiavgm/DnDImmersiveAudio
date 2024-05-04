@@ -34,10 +34,14 @@ func _ready() -> void:
 	#AudioServer.set_bus_layout(audio_bus_layout)
 	sfx_channels = [$SFX0, $SFX1, $SFX2, $SFX3, $SFX4, $SFX5, $SFX6, $SFX7]
 	bgm_channel = $BGM
+	
+	bgm_channel.finished.connect(_send_completed_signal)
 
 	LPF_tweening = Tweening.NONE
 	if BUS_INDEX_BGM > 0: LPF_effect = AudioServer.get_bus_effect(BUS_INDEX_BGM, 0)
 
+func _send_completed_signal() -> void:
+	Signals.TRACK_COMPLETED_SIGNAL.emit()
 
 func cycle_channel() -> void:
 	channel_id_to_play_on = (channel_id_to_play_on+1) % sfx_channels.size()
@@ -153,18 +157,23 @@ func play_bgm_from_filename(filename: String, playback_mode: PlaybackMode) -> vo
 			var audio_stream := AudioStreamMP3.new()
 			audio_stream.data = snd_file.get_buffer(snd_file.get_length())
 			
-			if playback_mode != PlaybackMode.PLAY_GODOT_DEFAULT:
-				set_bgm_loop(playback_mode == PlaybackMode.PLAY_LOOPED)
+			if playback_mode == PlaybackMode.PLAY_LOOPED:
+				set_bgm_loop(true)
+			else:
+				set_bgm_loop(false)
+				
 			
 			snd_file.close()
 			play_bgm(audio_stream)
 		"ogg":
 			var audio_stream := AudioStreamOggVorbis.load_from_file(full_file_path)
-			
-			if playback_mode != PlaybackMode.PLAY_GODOT_DEFAULT:
-				set_bgm_loop(playback_mode == PlaybackMode.PLAY_LOOPED)
+			if playback_mode == PlaybackMode.PLAY_LOOPED:
+				set_bgm_loop(true)
+			else:
+				set_bgm_loop(false)
 			
 			snd_file.close()
+
 			play_bgm(audio_stream)
 		_: 
 			printerr(".%s not supported!" % file_ending)
@@ -183,6 +192,7 @@ func play_bgm_from_filename(filename: String, playback_mode: PlaybackMode) -> vo
 		#audio_stream.set_loop(true)
 
 	#play_bgm(audio_stream)
+	
 
 
 func _restart() -> void:
@@ -190,6 +200,7 @@ func _restart() -> void:
 
 
 func play_bgm(bgm_to_play: Variant, volume: float = 1.0) -> void:
+	printerr("starting stream")
 	bgm_channel.stream = bgm_to_play
 	if global_bgm_volume == 0.0:
 		bgm_channel.volume_db = -80.0
@@ -204,8 +215,8 @@ func set_bgm_loop(set_enabled: bool) -> void:
 	if set_enabled:
 		if !bgm_channel.finished.is_connected(_restart):
 			bgm_channel.finished.connect(_restart)
-		if bgm_channel.finished.is_connected(stop_bgm):
-			bgm_channel.finished.disconnect(stop_bgm)
+		#if bgm_channel.finished.is_connected(stop_bgm):
+			#bgm_channel.finished.disconnect(stop_bgm)
 	else:
 		if bgm_channel.finished.is_connected(_restart):
 			bgm_channel.finished.disconnect(_restart)
