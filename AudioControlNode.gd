@@ -2,7 +2,9 @@ extends Control
 
 class_name AudioControlNode
 
-#const AUDIO_CONTROL_NODE = preload("res://AudioControlNode.tscn")
+const AUDIO_CONTROL_NODE = preload("res://AudioControlNodeUI.tscn")
+
+@onready var panel: Panel = $Panel
 
 @onready var loop_txt: LineEdit = $Panel/LoopTxt
 @onready var track_id_lbl: Label = $Panel/TrackIDLbl
@@ -19,8 +21,6 @@ class_name AudioControlNode
 
 
 static var next_id: int
-
-
 
 func serialize() -> Dictionary:
 	var result: Dictionary = {}
@@ -50,12 +50,11 @@ static func deserialize_array(data: Variant) -> Array[AudioControlNode]:
 
 
 static func deserialize(data: Dictionary) -> AudioControlNode:
-	#var result: AudioControlNode = AUDIO_CONTROL_NODE.instantiate()
+	var result: AudioControlNode = AUDIO_CONTROL_NODE.instantiate()
 	if data.is_empty():
 		printerr("Could not deserialize DialogueEditorNode!")
-		#return result
+		return result
 
-	var result := AudioControlNode.new()
 	result.file_path = data["file_path"] if data.has("file_path") else ""
 	result.id = data["id"] if data.has("id") else 0
 	result.loop_count = data["loop_count"] if data.has("loop_count") else 1
@@ -68,8 +67,7 @@ func _ready() -> void:
 	id = next_id
 	track_id_lbl.text = str(id)
 	next_id += 1
-	#link_txt.text = str(-1)
-	#loop_txt.text = str(1)
+
 	Signals.UPDATE_UI_SIGNAL.connect(_update_ui)
 	_update_ui()
 
@@ -85,9 +83,15 @@ func _update_ui() -> void:
 	link_txt.text = str(link_to)
 	
 	is_sfx_button.button_pressed = is_sfx
+	
+	if filename.is_empty():
+		panel.self_modulate = Color(0.5, 0.5, 0.5)
+	elif is_sfx:
+		panel.self_modulate = Color.LIGHT_YELLOW
+	else:
+		panel.self_modulate = Color.LIGHT_GREEN
 
 func _on_mouse_entered() -> void:
-
 	if DragDropFileReader.last_file_path.is_empty(): return ## early exit
 	
 	## copy the last file path
@@ -99,12 +103,12 @@ func _on_mouse_entered() -> void:
 	var filename_split: PackedStringArray = file_path.split("\\")
 	var filename: String = filename_split[filename_split.size() - 1]
 	trackname_lbl.text = filename
+	
+func _on_mouse_exited() -> void:
+	_update_ui()
 
 
 func _on_play_button_pressed() -> void:
-	var test := serialize()
-	printerr(test)
-		
 	if file_path.is_empty(): return ## early exit
 	
 	if is_sfx_button.button_pressed:
@@ -112,5 +116,16 @@ func _on_play_button_pressed() -> void:
 	else:
 		## only update playlist when clicking a BGM sound, not for SFX
 		Signals.CREATE_PLAYLIST_SIGNAL.emit(id)
-		
 
+
+func _on_loop_txt_text_changed(new_text: String) -> void:
+	loop_count = int(new_text)
+
+
+func _on_link_txt_text_changed(new_text: String) -> void:
+	link_to = int(new_text)
+	
+
+func _on_is_sfx_button_pressed() -> void:
+	is_sfx = is_sfx_button.button_pressed
+	_update_ui()

@@ -194,13 +194,11 @@ func play_bgm_from_filename(filename: String, playback_mode: PlaybackMode) -> vo
 	#play_bgm(audio_stream)
 	
 
-
 func _restart() -> void:
 	bgm_channel.play()
 
 
 func play_bgm(bgm_to_play: Variant, volume: float = 1.0) -> void:
-	printerr("starting stream")
 	bgm_channel.stream = bgm_to_play
 	if global_bgm_volume == 0.0:
 		bgm_channel.volume_db = -80.0
@@ -211,7 +209,7 @@ func play_bgm(bgm_to_play: Variant, volume: float = 1.0) -> void:
 
 
 func set_bgm_loop(set_enabled: bool) -> void:
-	print_debug("Set BGM looping to [%s]" % str(set_enabled))
+	# print_debug("Set BGM looping to [%s]" % str(set_enabled))
 	if set_enabled:
 		if !bgm_channel.finished.is_connected(_restart):
 			bgm_channel.finished.connect(_restart)
@@ -220,8 +218,8 @@ func set_bgm_loop(set_enabled: bool) -> void:
 	else:
 		if bgm_channel.finished.is_connected(_restart):
 			bgm_channel.finished.disconnect(_restart)
-		if !bgm_channel.finished.is_connected(stop_bgm):
-			bgm_channel.finished.connect(stop_bgm)
+		#if !bgm_channel.finished.is_connected(stop_bgm):
+			#bgm_channel.finished.connect(stop_bgm)
 
 
 func stop_bgm() -> void:
