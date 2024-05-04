@@ -17,7 +17,11 @@ func _ready() -> void:
 	Signals.TRACK_COMPLETED_SIGNAL.connect(_play_next_track)
 
 func _get_dropped_files(files: PackedStringArray) -> void:
-	last_file_path = files[0]
+	var filepath: String = files[0]
+	if filepath.ends_with(".json"): 
+		load_playlist_editor_from_file(files[0])
+	else:
+		last_file_path = filepath
 
 func generate_playlist(from_id: int) -> void:
 	playlist = {}

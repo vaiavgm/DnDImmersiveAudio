@@ -2,7 +2,7 @@ extends Control
 
 class_name AudioControlNode
 
-const AUDIO_CONTROL_NODE = preload("res://AudioControlNode.tscn")
+#const AUDIO_CONTROL_NODE = preload("res://AudioControlNode.tscn")
 
 @onready var loop_txt: LineEdit = $Panel/LoopTxt
 @onready var track_id_lbl: Label = $Panel/TrackIDLbl
@@ -50,12 +50,12 @@ static func deserialize_array(data: Variant) -> Array[AudioControlNode]:
 
 
 static func deserialize(data: Dictionary) -> AudioControlNode:
-	var result: AudioControlNode = AUDIO_CONTROL_NODE.instantiate()
+	#var result: AudioControlNode = AUDIO_CONTROL_NODE.instantiate()
 	if data.is_empty():
 		printerr("Could not deserialize DialogueEditorNode!")
-		return result
+		#return result
 
-	#var result := AudioControlNode.new()
+	var result := AudioControlNode.new()
 	result.file_path = data["file_path"] if data.has("file_path") else ""
 	result.id = data["id"] if data.has("id") else 0
 	result.loop_count = data["loop_count"] if data.has("loop_count") else 1
